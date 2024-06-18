@@ -18,7 +18,12 @@ class CreditCardProcessor
   def summary
     @cards.keys.sort.map do |name|
       card = @cards[name]
-      "#{name}: $#{card.balance}"
+      if card.valid?
+        "#{name}: $#{card.balance}"
+      else
+        "#{name}: error"
+      end
     end
-  end  
+  end 
 end
+
