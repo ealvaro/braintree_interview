@@ -27,4 +27,11 @@ class CreditCardProcessorTest < Minitest::Test
     @processor.process_line("Charge Tom $1500")
     assert_equal ["Tom: $0"], @processor.summary
   end
+
+  def test_credit
+    @processor.process_line("Add Tom 4111111111111111 $1000")
+    @processor.process_line("Charge Tom $500")
+    @processor.process_line("Credit Tom $200")
+    assert_equal ["Tom: $300"], @processor.summary
+  end
 end

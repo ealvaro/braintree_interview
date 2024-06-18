@@ -15,6 +15,9 @@ class CreditCardProcessor
     when "Charge"
       name, amount = parts[1], parts[2][1..-1].to_i
       @cards[name]&.charge(amount)
+    when "Credit"
+      name, amount = parts[1], parts[2][1..-1].to_i
+      @cards[name]&.credit(amount)
     end
   end
 

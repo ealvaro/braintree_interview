@@ -18,6 +18,11 @@ class CreditCard
     @balance = new_balance if new_balance <= @limit
   end
 
+  def credit(amount)
+    return unless valid?
+    @balance -= amount
+  end
+
   private
 
   def luhn_check(number)
