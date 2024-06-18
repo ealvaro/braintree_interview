@@ -12,6 +12,9 @@ class CreditCardProcessor
     when "Add"
       name, number, limit = parts[1], parts[2], parts[3][1..-1].to_i
       @cards[name] = CreditCard.new(name, number, limit)
+    when "Charge"
+      name, amount = parts[1], parts[2][1..-1].to_i
+      @cards[name]&.charge(amount)
     end
   end
 
@@ -24,6 +27,5 @@ class CreditCardProcessor
         "#{name}: error"
       end
     end
-  end 
+  end
 end
-
