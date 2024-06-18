@@ -32,3 +32,19 @@ class CreditCardProcessor
     end
   end
 end
+
+if __FILE__ == $0
+  processor = CreditCardProcessor.new
+
+  if ARGV.empty?
+    while line = gets
+      processor.process_line(line)
+    end
+  else
+    File.readlines(ARGV[0]).each do |line|
+      processor.process_line(line)
+    end
+  end
+
+  puts processor.summary
+end

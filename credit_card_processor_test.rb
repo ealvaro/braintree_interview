@@ -34,4 +34,12 @@ class CreditCardProcessorTest < Minitest::Test
     @processor.process_line("Credit Tom $200")
     assert_equal ["Tom: $300"], @processor.summary
   end
+
+  def test_summary_order
+    @processor.process_line("Add Tom 4111111111111111 $1000")
+    @processor.process_line("Add Lisa 5454545454545454 $3000")
+    @processor.process_line("Charge Tom $500")
+    @processor.process_line("Credit Lisa $100")
+    assert_equal ["Lisa: $-100", "Tom: $500"], @processor.summary
+  end
 end
